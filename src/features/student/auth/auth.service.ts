@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -165,34 +166,23 @@ export class AuthService {
   async loginStudent({ email, password }: LoginStudentDto) {
     const student = await this.studentService.findByEmail(email);
     if (!student) {
-      throw new UnauthorizedException({
-        message: {
-          title: 'Invalid Credentials',
-          message:
-            'The email or password you entered is incorrect. Please check and try again.',
-        },
-      });
+      throw new UnauthorizedException(
+        'The email or password you entered is incorrect. Please check and try again.',
+      );
     }
     if (!student.isVerifiedEmail) {
-      throw new UnauthorizedException({
-        message: {
-          title: 'Unverified Account',
-          message: 'Please verify your account before logging in.',
-        },
-      });
+      throw new ForbiddenException(
+        'Please verify your account before logging in.',
+      );
     }
     const isPasswordValid = await bcrypt.compare(
       password,
       student.passwordHash,
     );
     if (!isPasswordValid) {
-      throw new UnauthorizedException({
-        message: {
-          title: 'Invalid Credentials',
-          message:
-            'The email or password you entered is incorrect. Please check and try again.',
-        },
-      });
+      throw new UnauthorizedException(
+        'The email or password you entered is incorrect. Please check and try again.',
+      );
     }
     // create accesstoken and refresh token and use symmetric or assymetric keys
     const accessToken = await this.jwtService.signAsync({ sub: student.id });

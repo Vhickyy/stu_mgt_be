@@ -60,6 +60,8 @@ export class AuthController {
   @Get('current-user')
   @UseGuards(StudentJwtAuthGuard)
   getCurrentUser(@CurrentStudent() student: Student) {
+    console.log({ student });
+
     return this.authService.getCurrentStudent(student);
   }
 }
