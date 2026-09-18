@@ -3,7 +3,6 @@ import { RegisterStudentDto } from './dto/RegisterStudentDto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginStudentDto } from './dto/LoginStudentDto';
-import { log } from 'node:console';
 import {
   ResendVerifyEmailtDto,
   VerifyStudentEmailtDto,

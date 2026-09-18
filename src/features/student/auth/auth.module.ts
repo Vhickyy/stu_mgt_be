@@ -17,6 +17,6 @@ import { StudentJwtStrategy } from './strategy/student.jwt.strategy';
     VerificationModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, StudentJwtStrategy],
+  providers: [AuthService, StudentJwtStrategy, StudentJwtAuthGuard],
 })
 export class AuthModule {}

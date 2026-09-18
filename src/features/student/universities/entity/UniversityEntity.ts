@@ -38,5 +38,5 @@ export class University {
     () => StudentProfile,
     (studentProfile) => studentProfile.university,
   )
-  profile: StudentProfile;
+  profile: StudentProfile[];
 }

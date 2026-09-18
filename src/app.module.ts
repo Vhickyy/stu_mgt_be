@@ -10,6 +10,8 @@ import { VerificationModule } from './features/shared/verification/verification.
 import { ConfigModule } from '@nestjs/config';
 import { UniversitiesModule } from './features/student/universities/universities.module';
 import { StudentProfilesModule } from './features/student/student_profiles/student_profiles.module';
+import { PermissionModule } from './features/admin/permission/permission.module';
+import { RoleModule } from './features/admin/role/role.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { StudentProfilesModule } from './features/student/student_profiles/stude
     VerificationModule,
     UniversitiesModule,
     StudentProfilesModule,
+    PermissionModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

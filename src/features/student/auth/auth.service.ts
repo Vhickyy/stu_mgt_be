@@ -27,13 +27,9 @@ export class AuthService {
     const studentExist = await this.studentService.findByEmail(student.email);
 
     if (studentExist) {
-      throw new ConflictException({
-        message: {
-          title: 'Email Already in Use.',
-          message:
-            'An account with this email already exists. Try signing in instead.',
-        },
-      });
+      throw new ConflictException(
+        'An account with this email already exists. Try signing in instead.',
+      );
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -71,12 +67,7 @@ export class AuthService {
     }
 
     if (student.isVerifiedEmail) {
-      throw new BadRequestException({
-        message: {
-          title: 'Account Already Verfied.',
-          message: 'Please proceed to login.',
-        },
-      });
+      throw new BadRequestException('Please proceed to login.');
     }
 
     await this.verificationService.verifyOtp({
@@ -98,20 +89,10 @@ export class AuthService {
   async resendVerifyEmailOtp(email: string) {
     const student = await this.studentService.findByEmail(email);
     if (!student) {
-      throw new NotFoundException({
-        message: {
-          title: 'Code Sent',
-          message: 'If email exist, a mail will be sent to it.',
-        },
-      });
+      throw new NotFoundException('If email exist, a mail will be sent to it.');
     }
     if (student.isVerifiedEmail) {
-      throw new BadRequestException({
-        message: {
-          title: 'Account Already Verfied.',
-          message: 'Please proceed to login.',
-        },
-      });
+      throw new BadRequestException('Please proceed to login.');
     }
 
     this.verificationService.canResendOtp(student.otpLastSentAt);
