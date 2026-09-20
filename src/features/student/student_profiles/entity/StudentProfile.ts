@@ -8,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { University } from '../../universities/entity/UniversityEntity';
 import { Student } from '../../students/entity/Student';
+import { University } from 'src/features/shared/universities/entity/UniversityEntity';
 
 @Entity('student_profiles')
 export class StudentProfile {
@@ -22,7 +22,7 @@ export class StudentProfile {
   @Column({ type: 'varchar', length: 150 })
   fullName: string;
 
-  @ManyToOne(() => University, (university) => university.profile)
+  @ManyToOne(() => University, (university) => university.profiles)
   university: University;
 
   @Column({ type: 'smallint' })

@@ -1,11 +1,13 @@
+import { StudentProfile } from 'src/features/student/student_profiles/entity/StudentProfile';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   Index,
   OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import { StudentProfile } from '../../student_profiles/entity/StudentProfile';
 
 @Entity('universities')
 export class University {
@@ -38,5 +40,11 @@ export class University {
     () => StudentProfile,
     (studentProfile) => studentProfile.university,
   )
-  profile: StudentProfile[];
+  profiles: StudentProfile[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

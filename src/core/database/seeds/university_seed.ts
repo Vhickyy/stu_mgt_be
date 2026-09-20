@@ -1,4 +1,4 @@
-import { University } from 'src/features/student/universities/entity/UniversityEntity';
+import { University } from 'src/features/shared/universities/entity/UniversityEntity';
 import { Repository } from 'typeorm';
 
 const UNIVERSITIES_API = 'http://universities.hipolabs.com/search';

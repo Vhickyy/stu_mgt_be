@@ -7,7 +7,7 @@ import {
   ResendVerifyEmailtDto,
   VerifyStudentEmailtDto,
 } from './dto/VerifyStudentEmailDto';
-import { StudentJwtAuthGuard } from './gaurds/student.jwt.gaurd';
+import { StudentJwtAuthGuard } from '../../admin/auth/gaurds/admin.jwt.gaurd';
 import { Student } from '../students/entity/Student';
 import { CurrentStudent } from './decorators/current_user.decorator';
 

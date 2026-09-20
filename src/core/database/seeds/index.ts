@@ -2,8 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { DataSource } from 'typeorm';
 import { AppModule } from '../../../app.module';
 import { seedUniversities } from './university_seed';
-import { University } from 'src/features/student/universities/entity/UniversityEntity';
 import { seedRbac } from './rbac_seed';
+import { University } from 'src/features/shared/universities/entity/UniversityEntity';
 
 async function run() {
   const app = await NestFactory.createApplicationContext(AppModule);

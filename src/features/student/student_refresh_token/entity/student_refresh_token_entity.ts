@@ -9,7 +9,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { University } from '../../universities/entity/UniversityEntity';
 import { StudentProfile } from '../../student_profiles/entity/StudentProfile';
 // import { StudentRefreshToken } from './student-refresh-token.entity';
 

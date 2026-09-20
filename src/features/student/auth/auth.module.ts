@@ -6,7 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import jwtConfig from 'src/core/config/jwt.config';
 import { StudentsModule } from '../students/students.module';
 import { VerificationModule } from 'src/features/shared/verification/verification.module';
-import { StudentJwtAuthGuard } from './gaurds/student.jwt.gaurd';
+import { StudentJwtAuthGuard } from '../../admin/auth/gaurds/admin.jwt.gaurd';
 import { StudentJwtStrategy } from './strategy/student.jwt.strategy';
 
 @Module({

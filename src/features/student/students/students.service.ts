@@ -36,4 +36,15 @@ export class StudentsService {
   async save(student: Student): Promise<Student> {
     return this.studentRepo.save(student);
   }
+
+  async getAllStudents() {
+    return this.studentRepo.find({
+      select: { id: true, email: true, isVerifiedEmail: true },
+      relations: {
+        profile: {
+          university: true,
+        },
+      },
+    });
+  }
 }

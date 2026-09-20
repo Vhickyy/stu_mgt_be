@@ -5,10 +5,12 @@ import {
   Index,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Permission } from '../permission/permission.entity';
+import { Admin } from '../admin/admin.entity';
 
 @Entity('roles')
 export class Role {
@@ -28,6 +30,9 @@ export class Role {
     nullable: true,
   })
   description: string | null;
+
+  @OneToMany(() => Admin, (admin) => admin.role)
+  admins: Admin[];
 
   @ManyToMany(() => Permission, {
     cascade: false,
