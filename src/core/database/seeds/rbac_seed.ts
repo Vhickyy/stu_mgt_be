@@ -10,46 +10,66 @@ export async function seedRbac(dataSource: DataSource) {
     const permissions = [
       {
         name: 'students.read',
+        resource: 'students',
+        action: 'read',
         description: 'View students',
       },
       {
         name: 'students.update',
+        resource: 'students',
+        action: 'update',
         description: 'Update student information',
       },
       {
         name: 'students.delete',
+        resource: 'students',
+        action: 'delete',
         description: 'Delete students',
       },
 
       {
         name: 'admins.read',
+        resource: 'admins',
+        action: 'read',
         description: 'View administrators',
       },
       {
         name: 'admins.update',
+        resource: 'admins',
+        action: 'update',
         description: 'Update administrator information',
       },
       {
         name: 'admins.assign_role',
+        resource: 'admins',
+        action: 'assign_role',
         description: 'Assign roles to administrators',
       },
       {
         name: 'admins.deactivate',
+        resource: 'admins',
+        action: 'deactivate',
         description: 'Deactivate administrators',
       },
 
       {
         name: 'universities.read',
+        resource: 'universities',
+        action: 'read',
         description: 'View universities',
       },
 
       {
         name: 'departments.read',
+        resource: 'departments',
+        action: 'read',
         description: 'View departments',
       },
 
       {
         name: 'subscriptions.read',
+        resource: 'subscriptions',
+        action: 'read',
         description: 'View student subscriptions',
       },
     ];

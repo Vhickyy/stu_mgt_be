@@ -75,11 +75,11 @@ export class UniversitiesService {
         'inactiveStudents',
       );
 
-    if (search) {
-      statsQuery.andWhere('university.name ILIKE :search', {
-        search: `%${search}%`,
-      });
-    }
+    // if (search) {
+    //   statsQuery.andWhere('university.name ILIKE :search', {
+    //     search: `%${search}%`,
+    //   });
+    // }
 
     const stats = await statsQuery.getRawOne();
 

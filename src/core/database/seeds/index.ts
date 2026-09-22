@@ -4,23 +4,27 @@ import { AppModule } from '../../../app.module';
 import { seedUniversities } from './university_seed';
 import { seedRbac } from './rbac_seed';
 import { University } from 'src/features/shared/universities/entity/UniversityEntity';
+import { AppDataSource } from './data-source';
 
 async function run() {
-  const app = await NestFactory.createApplicationContext(AppModule);
+  // const app = await NestFactory.createApplicationContext(AppModule);
 
   try {
-    const dataSource = app.get(DataSource);
+    // const dataSource = app.get(DataSource);
+    await AppDataSource.initialize();
 
     // const universityRepository = dataSource.getRepository(University);
 
     // await seedUniversities(universityRepository);
 
-    // await seedRbac(dataSource);
+    await seedRbac(AppDataSource);
   } catch (error) {
     console.error('Seeding failed:', error);
     process.exitCode = 1;
   } finally {
-    await app.close();
+    if (AppDataSource.isInitialized) {
+      await AppDataSource.destroy();
+    }
   }
 }
 

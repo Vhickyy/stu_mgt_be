@@ -26,6 +26,12 @@ export class Permission {
   })
   description: string | null;
 
+  @Column({ type: 'varchar', length: 100 })
+  resource: string;
+
+  @Column({ type: 'varchar', length: 100 })
+  action: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

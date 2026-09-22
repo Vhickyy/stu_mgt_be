@@ -14,10 +14,10 @@ export class AdminProfile {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100 })
   first_name: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100 })
   last_name: string;
 
   @OneToOne(() => Admin, (admin) => admin.profile, {
