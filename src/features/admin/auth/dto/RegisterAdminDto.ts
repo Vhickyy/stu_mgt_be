@@ -7,7 +7,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { StudentProfileDto } from 'src/features/student/student_profiles/dto/StudentProfileDTO';
+import { SuperAdminProfileDto } from './SuperAdminProfileDto';
 
 export class RegisterAdminDto {
   @ApiProperty({
@@ -35,10 +35,10 @@ export class RegisterAdminDto {
   confirmPassword!: string;
 
   @ApiProperty({
-    type: () => StudentProfileDto,
+    type: () => SuperAdminProfileDto,
     description: 'Admin profile information',
   })
   @ValidateNested()
-  @Type(() => StudentProfileDto)
-  profile!: StudentProfileDto;
+  @Type(() => SuperAdminProfileDto)
+  profile!: SuperAdminProfileDto;
 }
