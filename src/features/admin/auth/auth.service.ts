@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   ForbiddenException,
   Injectable,
@@ -14,6 +15,7 @@ import { RegisterAdminDto } from './dto/RegisterAdminDto';
 import { LoginAdminDto } from './dto/LoginAdminDto';
 import { AdminRole } from '../enums/admin_role_enum';
 import { RoleService } from '../role/role.service';
+import { AdminProfile } from '../admin_profile/entity/admin-profile.entity.dto';
 
 @Injectable()
 export class AuthService {
@@ -25,6 +27,11 @@ export class AuthService {
   ) {}
 
   async registerAdmin(admin: RegisterAdminDto) {
+    // Ensure the two password fields match before we proceed.
+    if (admin.password !== admin.confirmPassword) {
+      throw new BadRequestException('Passwords do not match.');
+    }
+
     const adminExist = await this.adminService.findByEmail(admin.email);
 
     if (adminExist) {
@@ -33,6 +40,8 @@ export class AuthService {
       );
     }
 
+    // The very first admin to register becomes the SUPER_ADMIN.
+    // Every subsequent admin is assigned the regular ADMIN role.
     const isFirstAdmin = await this.adminService.hasAnyAdmin();
 
     const role = await this.roleService.findByName(
@@ -47,10 +56,18 @@ export class AuthService {
 
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(admin.password, salt);
+
+    // Map the DTO profile payload onto the AdminProfile entity so it can
+    // be persisted together with the admin (cascade insert).
+    const profile = new AdminProfile();
+    profile.first_name = admin.profile.first_name;
+    profile.last_name = admin.profile.last_name;
+
     const savedAdmin = await this.adminService.createAdmin({
-      ...admin,
+      email: admin.email,
       passwordHash,
       role,
+      profile,
     });
 
     const token = await this.verificationService.generateToken({
